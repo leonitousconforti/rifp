@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/rifp/rifp/build",
+  "command": "/usr/bin/g++   -isystem /usr/include/opencv4  -g   -std=gnu++11 -o CMakeFiles/rifp.dir/test.cpp.o -c /home/rifp/rifp/test.cpp",
+  "file": "/home/rifp/rifp/test.cpp"
+}
+]

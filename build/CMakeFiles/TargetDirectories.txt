@@ -1,0 +1,3 @@
+/home/rifp/rifp/build/CMakeFiles/rebuild_cache.dir
+/home/rifp/rifp/build/CMakeFiles/rifp.dir
+/home/rifp/rifp/build/CMakeFiles/edit_cache.dir
