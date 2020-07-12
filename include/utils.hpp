@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "modules/cam_fps_module.hpp"
+#include "modules/drawing_overlays_module.hpp"
 #include "modules/gstreamer_pipelines_module.hpp"
 #include "modules/mjpeg_streamer_module.hpp"
 
@@ -34,5 +35,7 @@ const std::string videoconvertSource = "video/x-raw, format=(string)BGR";
 using FpsCounter = modules::fps_counter_module;
 using GstreamerPipeline = modules::gstreamer_pipelines_module;
 using MJPEGStreamer = modules::MJPEG_streamer_module;
+using Interval = modules::Interval;
+namespace drawingOverlays = modules::drawing_overlays_module;
 
 } // namespace utils

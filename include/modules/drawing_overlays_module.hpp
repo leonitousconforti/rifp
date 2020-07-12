@@ -22,8 +22,40 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <opencv2/core/mat.hpp>
+#include <string>
+
 #pragma once
 
-namespace detection
+namespace modules
 {
+
+namespace drawing_overlays_module
+{
+
+cv::Mat drawRect(cv::Mat img, int x, int y, int w, int h)
+{
+    cv::Rect rect(x, y, w, h);
+    cv::rectangle(img, rect, cv::Scalar(0, 255, 0));
+    return img;
 }
+
+cv::Mat drawText(cv::Mat img, int x, int y, std::string msg)
+{
+    cv::Point pt_loc(x, y);
+    cv::putText(img, msg, pt_loc, cv::FONT_HERSHEY_COMPLEX_SMALL, 0.8,
+                cv::Scalar(0, 200, 250), 1, cv::LINE_AA);
+    return img;
+}
+
+cv::Mat addCross(cv::Mat img, int x, int y, int m_size)
+{
+    cv::Point pt_loc(x, y);
+    cv::drawMarker(img, pt_loc, cv::Scalar(255, 255, 255), cv::MARKER_CROSS,
+                   m_size, 1, 8);
+    return img;
+}
+
+} // namespace drawing_overlays_module
+
+} // namespace modules

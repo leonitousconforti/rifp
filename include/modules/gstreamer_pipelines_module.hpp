@@ -33,6 +33,7 @@ SOFTWARE.
 namespace modules
 {
 
+// Class for creating gstreamer pipelines
 class gstreamer_pipelines_module
 {
   public:
@@ -58,7 +59,7 @@ gstreamer_pipelines_module::~gstreamer_pipelines_module() {}
 
 std::string gstreamer_pipelines_module::getPipelineString()
 {
-    return (pipeline + " ! appsink");
+    return pipeline;
 }
 
 void gstreamer_pipelines_module::setStreamerSettings(

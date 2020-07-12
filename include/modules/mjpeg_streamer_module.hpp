@@ -27,20 +27,19 @@ SOFTWARE.
 
 #pragma once
 
-#include <csignal>
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include <unistd.h>
-
 #include <algorithm>
 #include <array>
 #include <condition_variable>
+#include <csignal>
 #include <iostream>
 #include <mutex>
+#include <netinet/in.h>
 #include <queue>
 #include <sstream>
 #include <string>
+#include <sys/socket.h>
 #include <thread>
+#include <unistd.h>
 #include <unordered_map>
 #include <utility>
 #include <vector>
@@ -58,6 +57,7 @@ class MJPEG_streamer_module
     void start();
     void stop();
     void publish(const std::string &path, const std::string &buffer);
+    bool shutdownFromBrowser();
 
   private:
     struct Payload
@@ -70,6 +70,7 @@ class MJPEG_streamer_module
     int port_;
     int master_socket_ = -1;
     int num_workers_;
+    bool shutdownFlag = false;
     struct sockaddr_in address_;
 
     std::thread thread_listener_;
@@ -227,6 +228,11 @@ void MJPEG_streamer_module::start()
                 {
                     path = req.substr(req.find("GET") + 4,
                                       req.find("HTTP/") - req.find("GET") - 5);
+
+                    if (path == "/shutdown")
+                    {
+                        shutdownFlag = true;
+                    }
                 }
                 else
                 {
@@ -310,6 +316,11 @@ void MJPEG_streamer_module::publish(const std::string &path,
             condition_.notify_one();
         }
     }
+}
+
+bool MJPEG_streamer_module::shutdownFromBrowser()
+{
+    return shutdownFlag;
 }
 
 } // namespace modules

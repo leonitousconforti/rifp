@@ -50,8 +50,7 @@ int main(int argc, char **argv)
         // Calculate fps
         fps.update();
 
-        // Do this approx 5-6 times a second
-        // (not necessary to do this for all 120 frames)
+        // Do this one time a second
         if (fps.getFrameCount() % 20 == 0)
         {
             // Draw a smaller rectangle overlay
@@ -84,7 +83,7 @@ int main(int argc, char **argv)
 
             // Publish frame after processing
             MjpegStreamer.publish(
-                "/stream", std::string(buff_bgr.begin(), buff_bgr.end()));
+                "/", std::string(buff_bgr.begin(), buff_bgr.end()));
 
             // Visit /shutdown to break from the loop and graceful shutdown
             if (MjpegStreamer.shutdownFromBrowser())
